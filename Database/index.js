@@ -29,7 +29,12 @@ const getQuestions = (req, res) => {
         helpful as question_helpfulness,
         reported,
         (select jsonb_object_agg(id, answer) from
-          (select * from answers
+          (select *,
+            (select jsonb_agg(photoArr)
+            from (SELECT * FROM
+            answer_photos WHERE answer_id = answers.id)
+            photoArr) as photos
+          from answers
           where question_id = questions.id)
           answer) as answers
         FROM questions
@@ -52,7 +57,7 @@ const getQuestions = (req, res) => {
         console.log('catch');
         client.release();
         console.log(err.stack);
-        // res.status(404).send(err);
+        res.status(404).send(err);
       })
     ));
 };
