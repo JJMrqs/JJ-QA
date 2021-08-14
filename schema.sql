@@ -1,8 +1,12 @@
-DROP DATABASE IF EXISTS qa;
+-- DROP DATABASE IF EXISTS qa;
 
-CREATE DATABASE qa;
+-- CREATE DATABASE qa;
 
-\c qa;
+-- \c qa;
+
+drop table if exists answer_photos;
+drop table if exists answers;
+drop table if exists questions;
 
 create table questions (
     id serial primary key,
@@ -15,26 +19,27 @@ create table questions (
     helpful int
 );
 
-copy questions from
-'/Users/jjmarquis/Desktop/galvanize/sdc_csv/questions.csv'
-delimiter ',' csv header;
+copy questions from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/questions.csv' delimiter ',' csv header;
+
 
 create table answers (
     id serial primary key,
-    question_id int not null references qustions(id),
+    question_id int not null references questions(id),
     answer_body varchar(1000) not null,
     answer_date bigint not null,
     answerer_name varchar(60) not null,
     answerer_email varchar(60) not null,
-    reported boolean, helpful int,
+    reported boolean,
+    helpful int
 );
 
 copy answers from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/answers.csv'
     delimiter ',' csv header;
 
+
 create table answer_photos (
     id serial primary key,
-    answer_id references answers(id),
+    answer_id int references answers(id),
     url varchar(200)
 );
 
