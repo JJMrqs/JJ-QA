@@ -16,26 +16,28 @@ create table questions (
     asker_name varchar(60) not null,
     asker_email varchar(60) not null,
     reported boolean,
-    helpful int
+    question_helpfulness int
 );
 
 copy questions from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/questions.csv' delimiter ',' csv header;
 
+SELECT pg_catalog.setval(pg_get_serial_sequence('questions', 'id'), (SELECT MAX(id) FROM questions)+1);
 
 create table answers (
     id serial primary key,
     question_id int not null references questions(id),
-    answer_body varchar(1000) not null,
+    body varchar(1000) not null,
     answer_date bigint not null,
     answerer_name varchar(60) not null,
     answerer_email varchar(60) not null,
     reported boolean,
-    helpful int
+    helpfulness int
 );
 
 copy answers from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/answers.csv'
     delimiter ',' csv header;
 
+SELECT pg_catalog.setval(pg_get_serial_sequence('answers', 'id'), (SELECT MAX(id) FROM answers)+1);
 
 create table answer_photos (
     id serial primary key,
@@ -46,3 +48,4 @@ create table answer_photos (
 copy answer_photos from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/answers_photos.csv'
 delimiter ',' csv header;
 
+SELECT pg_catalog.setval(pg_get_serial_sequence('answer_photos', 'id'), (SELECT MAX(id) FROM answer_photos)+1);

@@ -17,3 +17,9 @@ app.get('/api/qa/questions', db.getQuestions);
 // app.get('/api/qa/questions', (req, res) => {
 //   console.log('req.params: ', req.params, 'req.query: ', req.query);
 // });
+
+app.get('/api/qa/:question_id/answers', db.getAnswers);
+
+app.post('/api/qa/questions', db.addQuestion);
+
+app.post('/api/qa/questions/:question_id/answers', db.addAnswer);
