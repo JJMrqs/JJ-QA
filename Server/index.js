@@ -23,3 +23,11 @@ app.get('/api/qa/:question_id/answers', db.getAnswers);
 app.post('/api/qa/questions', db.addQuestion);
 
 app.post('/api/qa/questions/:question_id/answers', db.addAnswer);
+
+app.put('/api/qa/questions/:question_id/helpful', db.updateHelpful);
+
+app.put('/api/qa/questions/:question_id/report', db.updateReported);
+
+app.put('/api/qa/answers/:answer_id/helpful', db.updateHelpful);
+
+app.put('/api/qa/answers/:answer_id/report', db.updateReported);

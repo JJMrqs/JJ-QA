@@ -176,9 +176,78 @@ const addAnswer = (req, res) => {
     ));
 };
 
+const updateReported = (req, res) => {
+  const { question_id, answer_id } = req.params;
+  let tableName;
+  let id;
+  if (question_id) {
+    tableName = 'UPDATE questions set reported = true where id = $1';
+    id = question_id;
+  } else {
+    tableName = 'UPDATE answers set reported = true where id = $1';
+    id = answer_id;
+  }
+  console.log(tableName, id);
+  pool
+    .connect()
+    .then((client) => (client
+      .query(
+        tableName,
+        [id],
+      )
+      .then((result) => {
+        console.log('then');
+        client.release();
+        // console.log(result.rows[0]);
+        res.status(200).send('Updated');
+      })
+      .catch((err) => {
+        console.log('catch');
+        client.release();
+        console.log(err.stack);
+        res.status(404).send(err);
+      })
+    ));
+};
+const updateHelpful = (req, res) => {
+  const { question_id, answer_id } = req.params;
+  let tableName;
+  let id;
+  if (question_id) {
+    tableName = 'UPDATE questions set question_helpfulness = question_helpfulness + 1 where id = $1';
+    id = question_id;
+  } else {
+    tableName = 'UPDATE answers set helpfulness = helpfulness + 1 where id = $1';
+    id = answer_id;
+  }
+  console.log(tableName, id);
+  pool
+    .connect()
+    .then((client) => (client
+      .query(
+        tableName,
+        [id],
+      )
+      .then((result) => {
+        console.log('then');
+        client.release();
+        // console.log(result.rows[0]);
+        res.status(200).send('Updated');
+      })
+      .catch((err) => {
+        console.log('catch');
+        client.release();
+        console.log(err.stack);
+        res.status(404).send(err);
+      })
+    ));
+};
+
 module.exports = {
   getQuestions,
   getAnswers,
   addQuestion,
   addAnswer,
+  updateReported,
+  updateHelpful,
 };
