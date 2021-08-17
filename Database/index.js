@@ -15,14 +15,14 @@ const getQuestions = (req, res) => {
   const count = parseInt(req.query.count, 10) || 5;
   const page = parseInt(req.query.page, 10) || 1;
   const skip = (page - 1) * count || 0;
-  console.log(productId, count, page);
+  console.log(productId);
   // const product_id = 1800;
   // const count = 5;
   pool
     .connect()
     .then((client) => (client
       .query(
-        `SELECT
+        `explain analyze SELECT
         id as question_id,
         question_body,
         question_date,
@@ -45,7 +45,7 @@ const getQuestions = (req, res) => {
         [productId, count, skip],
       )
       .then((result) => {
-        console.log('then');
+        // console.log('then');
         client.release();
         // console.log(result.rows[0]);
         const sendRes = {
@@ -60,7 +60,11 @@ const getQuestions = (req, res) => {
         console.log(err.stack);
         res.status(404).send(err);
       })
-    ));
+    ))
+    .catch((err) => {
+      console.log('the pool broke');
+      res.status(500).send(err);
+    });
 };
 
 const getAnswers = (req, res) => {
@@ -89,7 +93,7 @@ const getAnswers = (req, res) => {
         [question_id, count, skip],
       )
       .then((result) => {
-        console.log('then');
+        // console.log('then');
         client.release();
         // console.log(result.rows[0]);
         const sendRes = {
@@ -106,14 +110,19 @@ const getAnswers = (req, res) => {
         console.log(err.stack);
         res.status(404).send(err);
       })
-    ));
+    ))
+    .catch((err) => {
+      console.log('the pool broke');
+      res.status(500).send(err);
+    });
 };
 
 const addQuestion = (req, res) => {
   // console.log(req.body);
   const {
-    body, name, email, product_id, date,
+    body, name, email, product_id,
   } = req.body;
+  const date = +new Date();
   console.log(body, name, email, product_id, date);
   pool
     .connect()
@@ -126,7 +135,7 @@ const addQuestion = (req, res) => {
         console.log('then');
         client.release();
         // console.log(result.rows[0]);
-        res.status(201);
+        res.status(201).send('created');
       })
       .catch((err) => {
         console.log('catch');
@@ -134,15 +143,20 @@ const addQuestion = (req, res) => {
         console.log(err.stack);
         res.status(404).send(err);
       })
-    ));
+    ))
+    .catch((err) => {
+      console.log('the pool broke');
+      res.status(500).send(err);
+    });
 };
 
 const addAnswer = (req, res) => {
   // console.log(req.body);
   const { question_id } = req.params;
   const {
-    body, name, email, date, photos,
+    body, name, email, photos,
   } = req.body;
+  const date = +new Date();
   console.log(body, name, email, photos, date);
   pool
     .connect()
@@ -173,7 +187,11 @@ const addAnswer = (req, res) => {
         console.log(err.stack);
         res.status(404).send(err);
       })
-    ));
+    ))
+    .catch((err) => {
+      console.log('the pool broke');
+      res.status(500).send(err);
+    });
 };
 
 const updateReported = (req, res) => {
@@ -207,7 +225,11 @@ const updateReported = (req, res) => {
         console.log(err.stack);
         res.status(404).send(err);
       })
-    ));
+    ))
+    .catch((err) => {
+      console.log('the pool broke');
+      res.status(500).send(err);
+    });
 };
 const updateHelpful = (req, res) => {
   const { question_id, answer_id } = req.params;
@@ -240,7 +262,11 @@ const updateHelpful = (req, res) => {
         console.log(err.stack);
         res.status(404).send(err);
       })
-    ));
+    ))
+    .catch((err) => {
+      console.log('the pool broke');
+      res.status(500).send(err);
+    });
 };
 
 module.exports = {

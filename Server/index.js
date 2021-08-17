@@ -1,7 +1,5 @@
 const express = require('express');
-const path = require('path');
-const axios = require('axios');
-const token = require('../config/configuration');
+
 const db = require('../Database/index');
 
 const app = express();
@@ -18,7 +16,7 @@ app.get('/api/qa/questions', db.getQuestions);
 //   console.log('req.params: ', req.params, 'req.query: ', req.query);
 // });
 
-app.get('/api/qa/:question_id/answers', db.getAnswers);
+app.get('/api/qa/questions/:question_id/answers', db.getAnswers);
 
 app.post('/api/qa/questions', db.addQuestion);
 

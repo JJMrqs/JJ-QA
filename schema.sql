@@ -23,6 +23,7 @@ copy questions from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/questions.csv' d
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('questions', 'id'), (SELECT MAX(id) FROM questions)+1);
 
+
 create table answers (
     id serial primary key,
     question_id int not null references questions(id),
@@ -49,3 +50,7 @@ copy answer_photos from '/Users/jjmarquis/Desktop/galvanize/sdc_csv/answers_phot
 delimiter ',' csv header;
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('answer_photos', 'id'), (SELECT MAX(id) FROM answer_photos)+1);
+
+CREATE index questions_productid on questions (product_id);
+create index answers_questionid on answers (question_id);
+create index photos_answerid on answer_photos (answer_id);

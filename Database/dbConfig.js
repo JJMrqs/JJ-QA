@@ -3,4 +3,5 @@ module.exports = {
   user: 'jjmarquis',
   password: '',
   database: 'qa',
+  max: 10,
 };
