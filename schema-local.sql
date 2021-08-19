@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS qna;
+DROP DATABASE IF EXISTS qa;
 
-CREATE DATABASE qna;
+CREATE DATABASE qa;
 
-\c qna;
+\c qa;
 
 drop table if exists answer_photos;
 drop table if exists answers;
@@ -19,7 +19,7 @@ create table questions (
     question_helpfulness int
 );
 
-copy questions from '/seed/questions.csv' delimiter ',' csv header;
+copy questions from '/Users/jjmarquis/Desktop/galvanize/sdc/csvs/questions.csv' delimiter ',' csv header;
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('questions', 'id'), (SELECT MAX(id) FROM questions)+1);
 
@@ -35,7 +35,7 @@ create table answers (
     helpfulness int
 );
 
-copy answers from '/seed/answers.csv'
+copy answers from '/Users/jjmarquis/Desktop/galvanize/sdc/csvs/answers.csv'
     delimiter ',' csv header;
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('answers', 'id'), (SELECT MAX(id) FROM answers)+1);
@@ -46,7 +46,7 @@ create table answer_photos (
     url varchar(200)
 );
 
-copy answer_photos from '/seed/answers_photos.csv'
+copy answer_photos from '/Users/jjmarquis/Desktop/galvanize/sdc/csvs/answers_photos.csv'
 delimiter ',' csv header;
 
 SELECT pg_catalog.setval(pg_get_serial_sequence('answer_photos', 'id'), (SELECT MAX(id) FROM answer_photos)+1);

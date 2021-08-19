@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 const { Pool } = require('pg');
 const dbConfig = require('./dbConfig');
+const dbLocal = require('./dbConfigLocal');
 
 const pool = new Pool(dbConfig);
 
@@ -22,7 +23,7 @@ const getQuestions = (req, res) => {
     .connect()
     .then((client) => (client
       .query(
-        `explain analyze SELECT
+        `SELECT
         id as question_id,
         question_body,
         question_date,
