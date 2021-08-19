@@ -52,5 +52,8 @@ delimiter ',' csv header;
 SELECT pg_catalog.setval(pg_get_serial_sequence('answer_photos', 'id'), (SELECT MAX(id) FROM answer_photos)+1);
 
 CREATE index questions_productid on questions (product_id);
+ANALYZE;
 create index answers_questionid on answers (question_id);
+ANALYZE;
 create index photos_answerid on answer_photos (answer_id);
+ANALYZE;
