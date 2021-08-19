@@ -5,6 +5,10 @@ const dbLocal = require('./dbConfigLocal');
 
 const pool = new Pool(dbConfig);
 
+pool.connect()
+  .then(() => { console.log('DB CONNECTION SUCCESFUL!'); })
+  .catch(() => { console.log('DB CONNECTION FAILED'); });
+
 pool.on('error', (err, client) => {
   console.error('unexpected error on idle client', err);
   process.exit(-1);

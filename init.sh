@@ -1,6 +1,9 @@
 sudo yum update -y
 sudo yum install git -y
 sudo yum install docker -y
+sudo yum –y install python3
+
+
 
 git clone https://github.com/J4-3/JJ-QA.git
 
