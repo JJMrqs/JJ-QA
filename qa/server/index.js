@@ -29,3 +29,7 @@ app.put('/api/qa/questions/:question_id/report', db.updateReported);
 app.put('/api/qa/answers/:answer_id/helpful', db.updateHelpful);
 
 app.put('/api/qa/answers/:answer_id/report', db.updateReported);
+
+app.get('/loaderio-50a1efd35ab2c91bba56c9cac4ac1e63/', (req, res) => {
+  res.send(/loaderio-50a1efd35ab2c91bba56c9cac4ac1e63/);
+});
