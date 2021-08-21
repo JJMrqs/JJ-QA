@@ -28,7 +28,7 @@ services:
       ports: 3002:80
       build:
         context: ./nginx
-        dockerfile: :
+        dockerfile: nginx.Dockerfile
 
 
 
