@@ -25,7 +25,8 @@ services:
       dockerfile: postgres.Dockerfile
     nginx:
       container_name: nginx
-      ports: 3002:80
+      ports:
+        - 80:3002
       build:
         context: ./nginx
         dockerfile: nginx.Dockerfile
