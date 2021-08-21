@@ -10,7 +10,26 @@ services:
     build:
       context: ./qa
       dockerfile: node.Dockerfile
-
+  postgres:
+    container_name: sdc-qa-postgres
+    env_file:
+      - .env
+    ports:
+      - 5555:5432
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      # POSTGRES_DB: "${DB_NAME}"
+    build:
+      context: .
+      dockerfile: postgres.Dockerfile
+  nginx:
+    container_name: nginx
+    ports:
+      - 3002:3002
+    build:
+      context: ./nginx
+      dockerfile: nginx.Dockerfile
 
 
 
