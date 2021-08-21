@@ -1,13 +1,16 @@
 version: '3.4'
 
 services:
-  nginx:
-    container_name: nginx
+  node:
+    container_name: sdc-qa-node
+    env_file:
+      - .env
     ports:
-      - 3002:3002
+      - 3002:3001
     build:
-      context: ./nginx
-      dockerfile: nginx.Dockerfile
+      context: ./qa
+      dockerfile: node.Dockerfile
+
 
 
 
