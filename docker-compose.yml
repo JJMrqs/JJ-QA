@@ -23,13 +23,13 @@ services:
     build:
       context: .
       dockerfile: postgres.Dockerfile
-  nginx:
-    container_name: nginx
-    ports:
-      - 3002:3002
-    build:
-      context: ./nginx
-      dockerfile: nginx.Dockerfile
+  # nginx:
+  #   container_name: nginx
+  #   ports:
+  #     - 3002:3002
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: nginx.Dockerfile
 
 
 
