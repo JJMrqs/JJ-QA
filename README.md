@@ -52,7 +52,7 @@ TEST:
 ![alt text](./Stress-Test/with-LB.png)
 
 Results:
-- All Queries able to handle 2,4000 RPS
+- All Queries able to handle 2,400 RPS
 
 
 
