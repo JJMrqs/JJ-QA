@@ -7,7 +7,7 @@ Developed RESTful API and database for an inherited front-end E-Commerce codebas
 
 ## About
 
-System Design Capstone for Hackreactor. This is the reviews API for an eCommerce website that was divided into a service based architecture. The API, server, and database were designed to interface with an inherited front-end. After creating and optimizing the backend, it was load tested locally, dockerized, deployed on ec2 instances, and finally load tested again. To increase the throughput, the system was horizontally scaled by adding more servers with an nginx load balancer. 
+System Design Capstone for Hackreactor. This is the questions and answers API for an eCommerce website that was divided into a service based architecture. The API, server, and database were designed to interface with an inherited front-end. After creating and optimizing the backend, it was load tested locally, dockerized, deployed on ec2 instances, and load tested again. To increase the throughput, the system was horizontally scaled by adding more servers with an nginx load balancer. The code in this repo does not include the raw data csv's and their 13million+ lines of data.
 
 
 ## Metrics
